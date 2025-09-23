@@ -9,9 +9,6 @@ void main() {
     return;
   }
 
-  if (angka % 2 == 0) {
-    print("✅ $angka adalah bilangan genap.");
-  } else {
-    print("✅ $angka adalah bilangan ganjil.");
-  }
+  String jenis = (angka % 2 == 0) ? "Genap" : "Ganjil";
+  print("🎯 Hasil: $angka adalah bilangan $jenis.");
 }
