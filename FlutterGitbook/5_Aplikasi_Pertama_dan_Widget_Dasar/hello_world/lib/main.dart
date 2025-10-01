@@ -9,88 +9,48 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
-        useMaterial3: true, // Material Design 3
-      ),
-      home: const MyHomePage(title: 'My Increment App'),
-    );
+    return const MaterialApp(home: Scaffold(body: MyLayout()));
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+class MyLayout extends StatelessWidget {
+  const MyLayout({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // ✅ Bagian AppBar
-      appBar: AppBar(
-        title: Text(widget.title),
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        foregroundColor: Colors.white,
-        centerTitle: true,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ElevatedButton(
+        child: const Text('Show alert'),
+        onPressed: () {
+          showAlertDialog(context);
+        },
       ),
-
-      // ✅ Bagian Body
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-
-      // ✅ Bottom Navigation / BottomAppBar
-      bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(), // notch utk FAB
-        notchMargin: 6.0,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            IconButton(
-              tooltip: "Home",
-              icon: const Icon(Icons.home),
-              onPressed: () {},
-            ),
-            IconButton(
-              tooltip: "Settings",
-              icon: const Icon(Icons.settings),
-              onPressed: () {},
-            ),
-          ],
-        ),
-      ),
-
-      // ✅ Floating Action Button (FAB)
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment Counter',
-        child: const Icon(Icons.add),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
+}
+
+showAlertDialog(BuildContext context) {
+  // set up the button
+  Widget okButton = TextButton(
+    child: const Text("OK"),
+    onPressed: () {
+      Navigator.pop(context);
+    },
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: const Text("My title"),
+    content: const Text("This is my message."),
+    actions: [okButton],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }
