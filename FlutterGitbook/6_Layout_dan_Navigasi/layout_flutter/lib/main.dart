@@ -73,7 +73,8 @@ class MyApp extends StatelessWidget {
         'yang sejuk dan pemandangan hijau yang memanjakan mata.'
         'Keunikan Bedengan adalah keberadaan sungai kecil dengan'
         'air yang jernih dan segar yang mengalir di sepanjang'
-        'area perkemahan, menambah nuansa damai.',
+        'area perkemahan, menambah nuansa damai.\n\n'
+        'Oleh An Naastasya (2341760131)',
         softWrap: true,
       ),
     );
@@ -85,8 +86,14 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Flutter layout demo'),
         ),
-        body: Column(
+        body: ListView(
           children: [
+            Image.asset(
+              'images/bedengan.jpg',
+              width: 600,
+              height: 240,
+              fit: BoxFit.cover,
+            ),
             titleSection,
             buttonSection,
             textSection,
