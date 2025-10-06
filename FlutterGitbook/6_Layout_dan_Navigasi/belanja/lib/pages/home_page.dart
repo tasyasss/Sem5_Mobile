@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import '../models/item.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+  
+  // Daftar item yang akan ditampilkan di halaman Home
+  final List<Item> items = [
+    Item(name: 'Sugar', price: 5000),
+    Item(name: 'Salt', price: 2000),
+  ];
 
   @override
   Widget build(BuildContext context) {
