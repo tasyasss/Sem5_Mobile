@@ -7,14 +7,56 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Kode Implementasi title row
+    Widget titleSection = Container(
+      padding: const EdgeInsets.all(32),
+      child: Row(
+        children: [
+          Expanded(
+            // Soal 1
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Soal 2
+                Container(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: const Text(
+                    'Wisata Gunung di Batu',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                const Text(
+                  'Batu, Malang, Indonesia',
+                  style: TextStyle(
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // Soal 3
+          const Icon(
+            Icons.star,
+            color: Colors.red,
+          ),
+          const Text('41'),
+        ],
+      ),
+    );
+
+    // Kode MaterialApp sebelumnya
     return MaterialApp(
       title: 'Flutter layout: An Naastasya (2341760131)',
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Flutter layout demo'),
         ),
-        body: const Center(
-          child: Text('Hello World'),
+        body: Column(
+          children: [
+            titleSection,
+          ],
         ),
       ),
     );
