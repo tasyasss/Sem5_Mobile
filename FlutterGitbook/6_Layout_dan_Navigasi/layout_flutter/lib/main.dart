@@ -21,14 +21,14 @@ class MyApp extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.only(bottom: 8),
                   child: const Text(
-                    'Wisata Gunung di Batu',
+                    'Bumi Perkemahan Bedengan Dau Malang',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
                 const Text(
-                  'Batu, Malang, Indonesia',
+                  'Dau, Malang, Indonesia',
                   style: TextStyle(
                     color: Colors.grey,
                   ),
@@ -58,6 +58,26 @@ class MyApp extends StatelessWidget {
       ],
     );
 
+    // Widget textSection
+    Widget textSection = Container(
+      padding: const EdgeInsets.all(32),
+      child: const Text(
+        'Bumi Perkemahan Bedengan Dau Malang adalah destinasi'
+        'wisata alam berkonsep bumi perkemahan yang terletak'
+        'di Desa Selorejo, Kecamatan Dau, Kabupaten Malang.'
+        'Tempat ini menawarkan suasana yang tenang dan sangat'
+        'asri, jauh dari hiruk pikuk perkotaan, menjadikannya'
+        'lokasi ideal untuk healing dan menikmati alam.\n\n'
+        'Kawasan wisata seluas 2,5 hektar ini didominasi oleh'
+        'hutan pinus yang menjulang tinggi, menyajikan udara'
+        'yang sejuk dan pemandangan hijau yang memanjakan mata.'
+        'Keunikan Bedengan adalah keberadaan sungai kecil dengan'
+        'air yang jernih dan segar yang mengalir di sepanjang'
+        'area perkemahan, menambah nuansa damai.',
+        softWrap: true,
+      ),
+    );
+
     // Kode MaterialApp sebelumnya
     return MaterialApp(
       title: 'Flutter layout: An Naastasya (2341760131)',
@@ -69,6 +89,7 @@ class MyApp extends StatelessWidget {
           children: [
             titleSection,
             buttonSection,
+            textSection,
           ],
         ),
       ),
