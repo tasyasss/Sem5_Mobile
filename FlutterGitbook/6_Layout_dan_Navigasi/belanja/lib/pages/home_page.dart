@@ -25,34 +25,43 @@ class HomePage extends StatelessWidget {
           itemCount: items.length,
           itemBuilder: (context, index) {
             final item = items[index];
-            return Card(
-              margin: const EdgeInsets.all(8),
-              child: Container(
-                padding: const EdgeInsets.all(12),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: Text(
-                        item.name,
-                        style: const TextStyle(fontSize: 18),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Text(
-                        'Rp ${item.price}',
-                        textAlign: TextAlign.end,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
+            return InkWell(
+              onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  '/item',
+                  arguments: item, // kirim data item ke halaman ItemPage
+                );
+              },
+              child: Card(
+                margin: const EdgeInsets.all(8),
+                child: Container(
+                  padding: const EdgeInsets.all(12),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: Text(
+                          item.name,
+                          style: const TextStyle(fontSize: 18),
                         ),
                       ),
-                    ),
-                  ],
-                ), // Row
-              ), // Container
-            ); // Card
+                      Expanded(
+                        flex: 1,
+                        child: Text(
+                          'Rp ${item.price}',
+                          textAlign: TextAlign.end,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
           },
         ), // ListView.builder
       ), // Container
