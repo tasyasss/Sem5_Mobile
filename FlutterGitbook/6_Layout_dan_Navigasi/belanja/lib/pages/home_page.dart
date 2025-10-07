@@ -1,70 +1,64 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../models/item.dart';
+import '../widgets/item_card.dart';
+import '../widgets/footer.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
 
-  // Daftar item yang akan ditampilkan di halaman Home
   final List<Item> items = [
-    Item(name: 'Sugar', price: 5000),
-    Item(name: 'Salt', price: 2000),
+    Item(
+      name: 'Gula',
+      price: 5000,
+      imageUrl: 'images/gula.jpg',
+      stock: 50,
+      rating: 4.5,
+    ),
+    Item(
+      name: 'Garam',
+      price: 2000,
+      imageUrl: 'images/garam.jpg',
+      stock: 100,
+      rating: 4.8,
+    ),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Daftar Belanja'),
+        title: const Text('Belanja'),
         backgroundColor: Colors.pink[400],
         foregroundColor: Colors.white,
       ),
-      body: Container(
-        margin: const EdgeInsets.all(8),
-        child: ListView.builder(
-          padding: const EdgeInsets.all(8),
-          itemCount: items.length,
-          itemBuilder: (context, index) {
-            final item = items[index];
-            return InkWell(
-              onTap: () {
-                Navigator.pushNamed(
-                  context,
-                  '/item',
-                  arguments: item, // kirim data item ke halaman ItemPage
+      body: Column(
+        children: [
+          Expanded(
+            child: GridView.builder(
+              padding: const EdgeInsets.all(12),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 0.75,
+                crossAxisSpacing: 12,
+                mainAxisSpacing: 12,
+              ),
+              itemCount: items.length,
+              itemBuilder: (context, index) {
+                final item = items[index];
+                return GestureDetector(
+                  onTap: () => context.push('/item', extra: item),
+                  child: ItemCard(item: item),
                 );
               },
-              child: Card(
-                margin: const EdgeInsets.all(8),
-                child: Container(
-                  padding: const EdgeInsets.all(12),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        flex: 2,
-                        child: Text(
-                          item.name,
-                          style: const TextStyle(fontSize: 18),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Text(
-                          'Rp ${item.price}',
-                          textAlign: TextAlign.end,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            );
-          },
-        ), // ListView.builder
-      ), // Container
+            ),
+          ),
+          const FooterWidget(
+            name: 'An Naastasya S',
+            nim: '2341760131',
+          ),
+        ],
+      ),
     );
   }
 }
