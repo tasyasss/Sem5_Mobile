@@ -1,16 +1,42 @@
-# layout_flutter
+# Pemograman Mobile Gitbook 6
+---
+# Layout dan Navigasi
 
-A new Flutter project.
+**Nama        : An Naastasya S.**  
+**Absensi     : 03**  
+**NIM         : 2341760131**  
+**Kelas       : SIB 3F**  
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## Praktikum 1: Membangun Layout di Flutter  
+---
+- Membuat sebuah project flutter baru dengan nama layout_flutter
+![Screenshot Praktikum 1 Langkah 1](images/P1_1.png)
+- Membuka file main.dart dan modifikasi, lalu mengisi nama dan NIM di text title
+![Screenshot Praktikum 1 Langkah 2](images/P1_2.png)
+- Modifikasi  file main.dart dan taruh kode Widget titleSection berikut di bagian atas metode build() di dalam kelas MyApp
+![Screenshot Praktikum 1 Langkah 4](images/P1_4.png)
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
+## Praktikum 2: Implementasi button row
+---
+- Membuat metode pembantu pribadi bernama buildButtonColumn(), yang mempunyai parameter warna, Icon dan Text, sehingga dapat mengembalikan kolom dengan widgetnya sesuai dengan warna tertentu.
+![Screenshot Praktikum 2 Langkah 1](images/P2_1.png)
+- Menambahkan Widget buttonSection lalu menambahkan widget variabel buttonSection ke dalam body
+![Screenshot Praktikum 2 Langkah 2-3](images/P2_2_3.png)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+## Praktikum 3: Implementasi text section
+---
+- Menambahkan Widget textSection lalu menambahkan widget variabel textSection ke dalam body
+![Screenshot Praktikum 3 Langkah 1](images/P3_1.png)
+
+---
+## Praktikum 4: Implementasi image section
+---
+- Membuat folder images di root project layout_flutter dan memasukkan file gambar tersebut ke folder images, lalu set nama file tersebut ke file pubspec.yaml
+![Screenshot Praktikum 4 Langkah 1](images/P4_1.png)
+- Menmbahkan image aset ke dalam body
+![Screenshot Praktikum 4 Langkah 2](images/P4_2.png)
