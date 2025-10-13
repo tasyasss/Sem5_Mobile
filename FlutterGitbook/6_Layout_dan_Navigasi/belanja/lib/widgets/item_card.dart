@@ -10,41 +10,43 @@ class ItemCard extends StatelessWidget {
     return Card(
       elevation: 3,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      clipBehavior: Clip.antiAlias, // agar gambar ikut terpotong rounded
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Gunakan AspectRatio agar proporsional
           Hero(
             tag: item.name,
-            child: ClipRRect(
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(12),
-              ),
+            child: AspectRatio(
+              aspectRatio: 1.2, // rasio 1.2:1 cocok untuk gambar produk seperti garam/gula
               child: Image.network(
                 item.imageUrl,
-                height: 100,
-                width: double.infinity,
                 fit: BoxFit.cover,
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   item.name,
                   style: const TextStyle(
-                    fontSize: 18,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
+                  overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 4),
                 Text(
                   'Rp ${item.price}',
-                  style: const TextStyle(color: Colors.green),
+                  style: const TextStyle(
+                    color: Colors.green,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: 6),
                 Row(
                   children: [
                     const Icon(Icons.star, color: Colors.amber, size: 16),

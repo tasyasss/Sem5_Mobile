@@ -1,16 +1,34 @@
-# belanja
+# Pemograman Mobile Gitbook 6
+---
+# Layout dan Navigasi
 
-A new Flutter project.
+**Nama        : An Naastasya S.**  
+**Absensi     : 03**  
+**NIM         : 2341760131**  
+**Kelas       : SIB 3F**  
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## Praktikum 5: Membangun Navigasi di Flutter
+---
+- Membuat sebuah project baru Flutter dengan nama belanja, dan susunan folder baru didalam folder lib seperti ini.
+![Screenshot Praktikum 5 Langkah 1](images/P5_1.png)
+- Buatlah dua buah file dart dengan nama home_page.dart dan item_page.dart pada folder pages. Untuk masing-masing file, deklarasikan class HomePage pada file home_page.dart dan ItemPage pada item_page.dart.
+![Screenshot Praktikum 5 Langkah 2](images/P5_2.png)
+- Mendefinisikan Route untuk kedua halaman yang telah dibuat. Definisi penamaan route harus bersifat unique. 
+![Screenshot Praktikum 5 Langkah 3](images/P5_3.png)
+- Membuat sebuah file dengan nama item.dart dan taruh pada folder models, lalu definisikan pemodelan data yang dibutuhkan.
+![Screenshot Praktikum 5 Langkah 4](images/P5_4.png)
+- Sumber data ListView diambil dari model List dari object Item, membuat daftar item
+![Screenshot Praktikum 5 Langkah 5](images/P5_5.png)
+- Membuat ListView dan itemBuilder untuk menampilkan daftar
+![Screenshot Praktikum 5 Langkah 6](images/P5_6.png)
+- Menambahkan aksi pada ListView dengan widget InkWell atau GestureDetector
+![Screenshot Praktikum 5 Langkah 7](images/P5_7.png)
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+## Tugas Praktikum 2 
+---
+![Screenshot Tugas](images/Hasil1.png)
+![Screenshot Tugas](images/Hasil2.png)
+![Screenshot Tugas](images/Hasil3.png)
