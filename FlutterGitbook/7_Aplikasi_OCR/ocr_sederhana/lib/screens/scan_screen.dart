@@ -2,8 +2,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
-import 'package:path/path.dart' as path;
-import 'package:path_provider/path_provider.dart';
 import 'result_screen.dart';
 
 late List<CameraDescription> cameras;
@@ -18,6 +16,7 @@ class ScanScreen extends StatefulWidget {
 class _ScanScreenState extends State<ScanScreen> {
   CameraController? _controller;
   Future<void>? _initializeControllerFuture;
+  String? _errorMessage; // ✅ simpan error agar bisa ditampilkan di UI
 
   @override
   void initState() {
@@ -26,20 +25,34 @@ class _ScanScreenState extends State<ScanScreen> {
   }
 
   Future<void> _initCamera() async {
+    setState(() {
+      _errorMessage = null; // reset error
+    });
+
     try {
       cameras = await availableCameras();
-      if (cameras.isNotEmpty) {
-        _controller = CameraController(cameras[0], ResolutionPreset.medium);
-        _initializeControllerFuture = _controller!.initialize();
-        if (mounted) setState(() {});
+
+      if (cameras.isEmpty) {
+        // ✅ Tidak ada kamera terdeteksi
+        setState(() {
+          _errorMessage = 'Kamera tidak ditemukan di perangkat ini.';
+        });
+        return;
       }
+
+      _controller = CameraController(cameras[0], ResolutionPreset.medium);
+
+      // Inisialisasi controller
+      _initializeControllerFuture = _controller!.initialize();
+      await _initializeControllerFuture;
+
+      if (mounted) setState(() {});
     } catch (e) {
-      // Handle camera initialization errors if needed
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Gagal menginisialisasi kamera: $e')),
-        );
-      }
+      // ✅ Tangani semua error (izin kamera ditolak, kamera rusak, dsb)
+      setState(() {
+        _errorMessage =
+            'Pemindaian Gagal! Periksa izin kamera atau coba lagi.\n\nError: $e';
+      });
     }
   }
 
@@ -51,10 +64,10 @@ class _ScanScreenState extends State<ScanScreen> {
 
   Future<String> _ocrFromFile(File imageFile) async {
     final inputImage = InputImage.fromFile(imageFile);
-    final textRecognizer =
-        TextRecognizer(script: TextRecognitionScript.latin);
-    final RecognizedText recognizedText =
-        await textRecognizer.processImage(inputImage);
+    final textRecognizer = TextRecognizer(script: TextRecognitionScript.latin);
+    final RecognizedText recognizedText = await textRecognizer.processImage(
+      inputImage,
+    );
     textRecognizer.close();
     return recognizedText.text;
   }
@@ -83,23 +96,73 @@ class _ScanScreenState extends State<ScanScreen> {
         MaterialPageRoute(builder: (_) => ResultScreen(ocrText: ocrText)),
       );
     } catch (e) {
-      if (!mounted) return;
+      debugPrint('Error saat mengambil gambar: $e');
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error saat mengambil/memproses foto: $e')),
+        const SnackBar(
+          content: Text(
+            'Pemindaian Gagal! Periksa izin kamera atau coba lagi.',
+          ),
+          duration: Duration(seconds: 3),
+        ),
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_controller == null ||
-        _initializeControllerFuture == null ||
-        !(_controller?.value.isInitialized ?? false)) {
-      return const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
+    // ✅ Jika ada error (kamera gak bisa diakses)
+    if (_errorMessage != null) {
+      return Scaffold(
+        backgroundColor: Colors.grey[900],
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.error, color: Colors.redAccent, size: 60),
+                const SizedBox(height: 20),
+                Text(
+                  _errorMessage!,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(color: Colors.white, fontSize: 16),
+                ),
+                const SizedBox(height: 30),
+                ElevatedButton.icon(
+                  onPressed: _initCamera,
+                  icon: const Icon(Icons.refresh),
+                  label: const Text('Coba Lagi'),
+                ),
+              ],
+            ),
+          ),
+        ),
       );
     }
 
+    // ✅ Saat kamera belum siap → tampilan loading
+    if (_controller == null ||
+        _initializeControllerFuture == null ||
+        !(_controller?.value.isInitialized ?? false)) {
+      return Scaffold(
+        backgroundColor: Colors.grey[900],
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              CircularProgressIndicator(color: Colors.yellow),
+              SizedBox(height: 20),
+              Text(
+                'Memuat Kamera... Harap tunggu.',
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    // ✅ Kamera siap
     return Scaffold(
       appBar: AppBar(title: const Text('Kamera OCR')),
       body: Column(
