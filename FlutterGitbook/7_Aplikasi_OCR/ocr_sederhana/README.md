@@ -11,15 +11,19 @@
 
 ## Instruksi Awal (SETUP)
 - Melakukan comiit awal untuk memastikan semua file proyek awal sudah tersimpan dengan aman di GitHub.
-<!-- ![Screenshot Setup](images/L1.png) -->
+![Screenshot Setup](images/Setup.png)
 
 ---
 ## Soal 1: Modifikasi Struktur Navigasi dan Aliran
 
-1. Pengubahan Navigasi Home 
-
+1. Pengubahan Navigasi Home
+![Screenshot Soal 1 Langkah 1](images/S1_Langkah1.jpeg)
 2. Teks Utuh dan Navigasi Balik
-
+![Screenshot Soal 1 Langkah 2](images/S1_Langkah2_1.jpeg)
+![Screenshot Soal 1 Langkah 2](images/S1_Langkah2_2.jpeg)
+![Screenshot Soal 1 Langkah 2](images/S1_Langkah2_3.jpeg)
+![Screenshot Soal 1 Langkah 2](images/S1_Langkah2_4.jpeg)
+![Screenshot Soal 1 Langkah 2](images/S1_Langkah2_5.jpeg)
 - Commit Soal 1
 
 ---
